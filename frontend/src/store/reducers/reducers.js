@@ -1,4 +1,4 @@
-import {fetchLinkSuccess} from "../actions/actions";
+import {FETCH_LINK_SUCCESS} from "../actions/actions";
 
 const initialState = {
     links: [],
@@ -6,8 +6,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case fetchLinkSuccess:
-            console.log(action.links);
+        case FETCH_LINK_SUCCESS:
             return {...state, links: action.links};
         default:
             return state;

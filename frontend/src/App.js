@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {connect} from "react-redux";
-import {createLink, fetchLink} from "./store/actions/actions";
+import {createLink} from "./store/actions/actions";
 
 class App extends Component {
 
@@ -18,11 +18,10 @@ class App extends Component {
             originalUrl: this.state.url
         };
         await this.props.createLink(Link);
-        await this.props.fetchLink();
     };
 
   render() {
-      console.log(this.props.links)
+      console.log(this.props.links);
     return (
         <div className="App">
           <h1>Shorten your link</h1>
@@ -30,6 +29,14 @@ class App extends Component {
           <input type="text" name="url" placeholder="Enter url here" onChange={this.changeInputHandler} value={this.state.url}/>
             </div>
           <button onClick={this.createLink}>Shorten</button>
+            {this.props.links.shortUrl &&
+            <div className="short">
+            <p>Your link now looks like this</p>
+            <a href={`http://localhost:8000/links/${this.props.links.shortUrl}`} target="_blank">
+                http://localhost:8000/links/{this.props.links.shortUrl}
+            </a>
+            </div>
+                }
         </div>
     )
   }
@@ -41,7 +48,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     createLink: (link) => dispatch(createLink(link)),
-    fetchLink: () => dispatch(fetchLink())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
