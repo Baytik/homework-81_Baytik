@@ -18,10 +18,10 @@ class App extends Component {
             originalUrl: this.state.url
         };
         await this.props.createLink(Link);
+        this.setState({url: ''});
     };
 
   render() {
-      console.log(this.props.links);
     return (
         <div className="App">
           <h1>Shorten your link</h1>
@@ -32,7 +32,7 @@ class App extends Component {
             {this.props.links.shortUrl &&
             <div className="short">
             <p>Your link now looks like this</p>
-            <a href={`http://localhost:8000/links/${this.props.links.shortUrl}`} target="_blank">
+            <a href={`http://localhost:8000/links/${this.props.links.shortUrl}`} target="_blank" rel="noopener noreferrer">
                 http://localhost:8000/links/{this.props.links.shortUrl}
             </a>
             </div>

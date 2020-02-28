@@ -4,11 +4,6 @@ const Link = require('../models/Link');
 
     const router = express.Router();
 
-    router.get('/', async (req, res) => {
-        const links = await Link.find();
-        res.send(links);
-    });
-
     router.get('/:shortUrl', async (req, res) => {
         const link = await Link.find({shortUrl: req.params.shortUrl});
         if (!link) {
